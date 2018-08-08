@@ -74,7 +74,8 @@ void Key_Check(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 		renderer.ca.movef(100);
 		renderer.update_ca();
 	}
-	if (_key1(VK_SPACE));
+	if (_key1(VK_SPACE))
+		renderer.ca.jump(&renderer);
 	if (_key1(VK_TAB));
 	return;
 }

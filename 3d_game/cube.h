@@ -9,10 +9,12 @@ public:
 	XMVECTOR VV[8];
 	XMMATRIX M;
 	VD D, DL, chD, chDL;
-	VVD planeD;
+	VVD planeDL;
+	VD planeD[6];
 	VI F;
 	XMVECTOR veloc = XMVectorSet(0, 100, 0, 0);
 	cube();
+	~cube();
 	void move(XMVECTOR);
 	void cal();
 };

@@ -12,7 +12,7 @@ using namespace std;
 /* 상수 선언 */
 const int dt1 = 20; //ms
 const int dt2 = 30;
-const int accel = -50;
+const int accel = -10000;
 const int monitor_x = 1980, monitor_y = 1080;
 const int index[6][5] = {
 	{ 0,1,2,3,0 },

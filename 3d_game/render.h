@@ -11,6 +11,7 @@ public:
 	VDD dots;
 	HWND hWnd;
 	render();
+	~render();
 	void update_ca();
 	void rendering();
 };

@@ -9,10 +9,12 @@ cube::cube() {
 	V[2] = XMVectorSet(1, -1, -1, 0) * 1000;
 	V[3] = XMVectorSet(-1, -1, -1, 0) * 1000;
 	V[4] = XMVectorSet(-1, 1, 1, 0) * 1000;
-	V[5] = XMVectorSet(-1, 1, 1, 0) * 1000;
+	V[5] = XMVectorSet(1, 1, 1, 0) * 1000;
 	V[6] = XMVectorSet(1, -1, 1, 0) * 1000;
 	V[7] = XMVectorSet(-1, -1, 1, 0) * 1000;
-	handle = _beginthread(thread1, 0, this);
+	for (int i = 0; i < 8; i++)
+		V[i] += XMVectorSet(0, (float)1000.01, 0, 0);
+	handle = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)thread1, this, 0, NULL);
 }
 
 void thread1(void* arg) {
@@ -24,6 +26,10 @@ void thread1(void* arg) {
 		XMVectorSetY(cur.veloc, y + accel * t);
 		move(XMVectorSet(0, y * t, 0, 0));
 	}
+}
+
+cube::~cube() {
+	CloseHandle((HANDLE)handle);
 }
 
 void cube::move(XMVECTOR v) {
@@ -38,7 +44,7 @@ void cube::move(XMVECTOR v) {
 }
 
 void cube::cal() {
-	chD.clear(); chDL.clear(); planeD.clear();
+	chD.clear(); chDL.clear(); planeDL.clear();
 	D.clear(); DL.clear();
 
 	for (int i = 0; i < 8; i++)
@@ -66,7 +72,7 @@ void cube::cal() {
 			DOT d = get_a_b(a, b);
 			temp.push_back(d);
 		}
-		planeD.push_back(temp);
+		planeDL.push_back(temp);
 		temp.clear();
 	}
 }

@@ -1,21 +1,20 @@
 #pragma once
 #include "calc.h"
-#include "render.h"
 
 class camera : private calc {
 private:
-	XMVECTOR up = XMVectorSet(0, -1, 0, 0);
-	XMVECTOR V = XMVectorSet(10, (float)700.01, -8000, 0);
-	XMVECTOR R = XMVectorSet(1, 0, 0, 0);
-	XMVECTOR LookAt = XMVectorSet(0, 0, 1, 0);
-	XMVECTOR veloc = XMVectorZero();
+	XMVECTOR up;
+	XMVECTOR R;
+	XMVECTOR LookAt;
 public:
-	unsigned int handle;
+	XMVECTOR V;
+	XMVECTOR veloc;
+	bool trigger;
 	XMMATRIX M;
 	camera();
 	void update();
 	void moves(float);
 	void movef(float);
-	void jump(render*);
+	void jump(void*);
 	void rotate(float, float);
 };
