@@ -1,6 +1,6 @@
 #include "render.h"
 
-void thread2(void *arg);
+void thread2(void*);
 
 render::render() {
 	cu.assign(1, cube());

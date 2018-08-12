@@ -3,9 +3,9 @@
 
 class cube : private calc {
 private:
-	XMVECTOR V[8];
 	unsigned int handle;
 public:
+	XMVECTOR V[8];
 	XMVECTOR VV[8];
 	XMMATRIX M;
 	VD D, DL, chD, chDL;

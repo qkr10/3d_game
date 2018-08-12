@@ -59,19 +59,19 @@ void Key_Check(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	if (_key(VK_ESCAPE))
 		DestroyWindow(hWnd);
 	if (_key('D')) {
-		renderer.ca.moves(-100);
+		renderer.ca.moves(-200);
 		renderer.update_ca();
 	}
 	if (_key('A')) {
-		renderer.ca.moves(100);
+		renderer.ca.moves(200);
 		renderer.update_ca();
 	}
 	if (_key('S')) {
-		renderer.ca.movef(-100);
+		renderer.ca.movef(-200);
 		renderer.update_ca();
 	}
 	if (_key('W')) {
-		renderer.ca.movef(100);
+		renderer.ca.movef(200);
 		renderer.update_ca();
 	}
 	if (_key1(VK_SPACE))
