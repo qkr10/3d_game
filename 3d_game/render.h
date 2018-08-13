@@ -8,6 +8,7 @@ private:
 	unsigned int handle;
 public:
 	vector<cube> cu;
+	queue<bullet> bu;
 	camera ca;
 	VDD dots;
 	HWND hWnd;

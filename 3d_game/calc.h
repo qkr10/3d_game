@@ -3,6 +3,7 @@
 #include <synchapi.h>
 #include <DirectXMath.h>
 #include <vector>
+#include <queue>
 #include <algorithm>
 #include <process.h>
 

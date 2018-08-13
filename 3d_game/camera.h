@@ -5,9 +5,9 @@ class camera : private calc {
 private:
 	XMVECTOR up;
 	XMVECTOR R;
-	XMVECTOR LookAt;
 public:
 	XMVECTOR V;
+	XMVECTOR LookAt;
 	XMVECTOR veloc;
 	bool trigger;
 	XMMATRIX M;

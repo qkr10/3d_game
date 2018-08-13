@@ -5,11 +5,12 @@ class bullet : private calc {
 private:
 	XMVECTOR rear, dir, front;
 	unsigned int handle;
-	void* P;
 public:
+	void* P;
+	bool erase;
 	DOT r, f;
 	bullet();
 	bullet(XMVECTOR, XMVECTOR, void*);
 	void move();
-	void check_collision();
+	bool check_collision();
 };

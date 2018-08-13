@@ -18,6 +18,7 @@ cube::cube() {
 }
 
 void thread1(void* arg) {
+	const static int dt1 = 100;
 	cube& cur = *(cube*)arg;
 	while (1) {
 		Sleep(dt1);

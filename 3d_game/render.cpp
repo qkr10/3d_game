@@ -9,10 +9,14 @@ render::render() {
 }
 
 void thread2(void* arg) {
+	const static int dt2 = 100;
 	render& cur = *(render*)arg;
 	while (1) {
 		cur.rendering();
 		InvalidateRect(cur.hWnd, NULL, true);
+		if (!cur.bu.empty())
+			if (cur.bu.front().erase)
+				cur.bu.pop();
 		Sleep(dt2);
 	}
 }
@@ -99,4 +103,8 @@ void render::rendering() {
 					dots.push_back(make_pair(cu[m].planeD[i][k], cu[m].planeD[i][k + 1]));
 			}
 		}
+}
+
+void render::shoot() {
+	bu.push(bullet(ca.V, ca.LookAt, this));
 }
