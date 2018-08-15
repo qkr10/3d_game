@@ -29,10 +29,6 @@ void thread1(void* arg) {
 	}
 }
 
-cube::~cube() {
-	CloseHandle((HANDLE)handle);
-}
-
 void cube::move(XMVECTOR v) {
 	for (int i = 0; i < 8; i++)
 		V[i] += v;

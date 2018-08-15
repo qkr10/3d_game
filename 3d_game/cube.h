@@ -14,7 +14,6 @@ public:
 	VI F;
 	XMVECTOR veloc = XMVectorSet(0, 100, 0, 0);
 	cube();
-	~cube();
 	void move(XMVECTOR);
 	void cal();
 };

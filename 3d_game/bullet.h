@@ -3,14 +3,16 @@
 
 class bullet : private calc {
 private:
-	XMVECTOR rear, dir, front;
-	unsigned int handle;
+	XMMATRIX* M;
 public:
+	XMVECTOR rear, dir, front;
 	void* P;
 	bool erase;
+	unsigned long long time, pre_time;
 	DOT r, f;
 	bullet();
-	bullet(XMVECTOR, XMVECTOR, void*);
+	bullet(XMVECTOR, XMVECTOR, void*, XMMATRIX*);
 	void move();
+	void calc();
 	bool check_collision();
 };

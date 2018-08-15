@@ -10,10 +10,9 @@ public:
 	vector<cube> cu;
 	queue<bullet> bu;
 	camera ca;
-	VDD dots;
+	VDD dots, buls;
 	HWND hWnd;
 	render();
-	~render();
 	void update_ca();
 	void rendering();
 	void shoot();

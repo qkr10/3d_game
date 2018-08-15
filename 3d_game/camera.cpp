@@ -21,7 +21,7 @@ void camera::moves(float f) {
 }
 
 void camera::movef(float f) {
-	V += XMVector3Cross(R, XMVectorSet(0, 1, 0, 0)) * f;
+	V += XMVector3Normalize(XMVector3Cross(R, XMVectorSet(0, 1, 0, 0))) * f;
 	update();
 }
 

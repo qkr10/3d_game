@@ -1,29 +1,10 @@
 #include "render.h"
 
-void thread2(void*);
-
 render::render() {
 	cu.assign(1, cube());
 	cu[0].M = ca.M;
-	handle = _beginthreadex(NULL, 0, (_beginthreadex_proc_type)thread2, this, 0, NULL);
 }
 
-void thread2(void* arg) {
-	const static int dt2 = 100;
-	render& cur = *(render*)arg;
-	while (1) {
-		cur.rendering();
-		InvalidateRect(cur.hWnd, NULL, true);
-		if (!cur.bu.empty())
-			if (cur.bu.front().erase)
-				cur.bu.pop();
-		Sleep(dt2);
-	}
-}
-
-render::~render() {
-	CloseHandle((HANDLE)handle);
-}
 
 void render::update_ca() {
 	vector<cube>::iterator it = cu.begin();
@@ -36,8 +17,10 @@ void render::rendering() {
 	vector<int> t(s, val);
 	vector<vector<int>> dp(s, t);
 	dots.clear();
+	buls.clear();
 	for (int i = 0; i < s; i++)
 		cu[i].cal();
+
 	//동적계획법 이용
 	//어떤물체가 어떤물체를 가리는지 판단
 	for (int n = 0; n < s; n++)
@@ -97,14 +80,43 @@ void render::rendering() {
 			for (int k = 0; k < cu[m].planeD[i].size() - 1; k++) {
 				int R = 0;
 				for (int l = 0; l < cu[m].F.size(); l++)
-					if (winding_num(cu[cu[m].F[l]].chD, (cu[m].planeD[i][k] + cu[m].planeD[i][k + 1]) / 2))
+					if (winding_num(cu[cu[m].F[l]].chD, (cu[m].planeD[i][k] + cu[m].planeD[i][k + 1]) / 2)) {
 						R++;
+						break;
+					}
 				if (R == 0)
 					dots.push_back(make_pair(cu[m].planeD[i][k], cu[m].planeD[i][k + 1]));
 			}
 		}
+
+	for each (auto item in bu._Get_container()) {
+		DOT itemL = get_a_b(item.r, item.f);
+		VDD temp;
+		temp.push_back(make_pair(item.r, item.r));
+		for (int m = 0; m < cu.size(); m++) {
+			for (int i = 0; i < cu[m].chDL.size(); i++) {
+				DOT p = point(itemL, cu[m].chDL[i]);
+				if (point_check(p, item.r, item.f))
+					temp.push_back(make_pair(p, item.r));
+			}
+		}
+		temp.push_back(make_pair(item.f, item.r));
+		sort(temp.begin(), temp.end(), judge);
+
+		for (int i = 0; i < temp.size() - 1; i++) {
+			int R = 0;
+			DOT d = (temp[i].first + temp[i + 1].first) / 2;
+			for (int j = 0; j < cu.size(); j++)
+				if (winding_num(cu[j].chD, d)) {
+					R++;
+					break;
+				}
+			if (R == 0)
+				buls.push_back(make_pair(temp[i].first, temp[i + 1].first));
+		}
+	}
 }
 
 void render::shoot() {
-	bu.push(bullet(ca.V, ca.LookAt, this));
+	bu.push(bullet(ca.V, ca.LookAt, this, &ca.M));
 }

@@ -14,6 +14,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		handling_WM_MOUSEMOVE(hWnd, uMsg, wParam, lParam);
 		break;
 	case WM_DESTROY:
+		KillTimer(hWnd, 1);
 		exit(0);
 		break;
 	default:
